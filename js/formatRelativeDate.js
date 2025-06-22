@@ -11,10 +11,9 @@ console.log( formatDate(new Date(new Date - 30 * 1000)) ); // "30 sec. ago"
 console.log( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 min. ago"
 console.log( formatDate(new Date(new Date - 24 * 3600 * 1000)) ); // current time, but yesterday
 
-
 function formatDate(date) {
     let relativeTime = '';
-    timeDifference = Date.now() - +date;
+    timeDifference = Date.now() - date;
     switch (true) {
         case (timeDifference < 1000):
             relativeTime += "right now";
@@ -25,8 +24,12 @@ function formatDate(date) {
         case (timeDifference < 60 * 60 * 1000):
             relativeTime += timeDifference / (60 * 1000) + " min. ago";
             break;
-        default: // backticks retain any whitespace count T-T
-            relativeTime += `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+        default:
+            relativeTime +=  `${twoDigit(date.getDate())}.${twoDigit(date.getMonth() + 1)}.${date.getFullYear()}`
+            relativeTime += ` ${twoDigit(date.getHours())}:${twoDigit(date.getMinutes())}`;
+    }
+    function twoDigit(data) {
+        return (data.toString().length === 1) ? `0${data}` : data;
     }
     return relativeTime;
 }
