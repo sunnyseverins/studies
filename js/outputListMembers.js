@@ -25,4 +25,5 @@ function printList1(l) {
 function printList2(l) {
     console.log(l.value);
     if (l.next !== null) printList2(l.next);
-} 
+}
+// I used the only input instead of creating 
